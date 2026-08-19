@@ -91,7 +91,7 @@ print("-" * 80)  # Traço separador
 
 # 4) SUBSTITUINDO VALORES EXISTENTES
 
-print("Lista de frutas antes das substituições:")
+print("Lista de frutas ANTES das substituições:")
 print(frutas)
 
 # Substituindo o valor da QUARTA posição
@@ -101,6 +101,80 @@ frutas[0] = "pitanga"
 # Substituindo o valor da ÚLTIMA posição
 frutas[-1] = "melão"
 
+print("Lista de frutas APÓS das substituições:")
 print(frutas)
 
 print("-" * 80)  # Traço separador
+
+# 5) DETERMINANDO A QUANTIDADE DE ELEMENTOS DA LISTA: len()
+
+print("Quantidade de elementos da lista de frutas:", len(frutas))
+print("Quantidade de elementos da lista de números:", len(primos))
+
+print("-" * 80)  # Traço separador
+
+# 6) REMOVENDO ELEMENTOS DA LISTA
+
+print("Lista de frutas, ANTES das remoções:")
+print(frutas)
+
+# 6.1) Remoção do ÚLTIMO elemento da lista: pop() (SEM parâmetro)
+
+print("Removendo o último elemento...")
+removido = frutas.pop()
+print("Elemento removido:", removido)
+print("Lista de frutas, após a remoção do último elemento:")
+print(frutas)
+
+print("-" * 80)  # Traço separador
+
+# 6.2) Remoção de um elemento por sua POSIÇÃO: pop() (COM parâmetro)
+
+print("Removendo o elemento da posição 5...")
+removido = frutas.pop(5)
+print("Elemento removido:", removido)
+print("Lista de frutas, após a remoção do elemento na posição 5:")
+print(frutas)
+
+print("-" * 80)  # Traço separador
+
+# 6.3) Removendo o elemento por seu VALOR: remove()
+
+print("Removendo o elemento 'maçã'...")
+frutas.remove("maçã")  # remove() não retorna valor
+print("Lista de frutas, após a remoção do elemento 'maçã':")
+print(frutas)
+
+print("-" * 80)  # Traço separador
+
+# 7) AUMENTANDO UMA LISTA COM ELEMENTOS DE OUTRA LISTA: extend()
+
+mais_frutas = ["carambola", "pera", "acerola", "jabuticaba", "caqui"]
+frutas.extend(mais_frutas)
+print("Lista de frutas, estendida com os elementos de mais_frutas:")
+print(frutas)
+
+print("-" * 80)  # Traço separador
+
+# 8) FATIANDO UMA LISTA
+#    Fatiar significa copiar uma parte da lista (sublista),
+#    criando uma nova lista. A lista original não é modificada.
+
+# Cria uma nova lista com os elementos das posições de 3 a 7
+# (posição 7 *NÃO* entra na lista)
+sublista3a7 = frutas[3:7]
+print("Sublista com elementos das posições 3 (inclusive) a 7 (exclusive):")
+print(sublista3a7)
+
+# Cria uma nova sublista com todos os elementos até a posição 5
+# (posição 5 *NÃO* entra na lista)
+sublista_ate5 = frutas[:5]
+print("Sublista com os elementos desde o início até a posição 5 (exclusive):")
+print(sublista_ate5)
+
+# Cria uma nova sublista com todos os elementos da posição 5 até o final
+# (posição 5 *ENTRA* na lista)
+sublista_desde5 = frutas[5:]
+print("Sublista com todos os elementos desde a posição 5 (inclusive) até o final:")
+print(sublista_desde5)
+
