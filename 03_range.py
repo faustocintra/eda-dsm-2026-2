@@ -16,8 +16,29 @@ print("-" * 80)
 # 2) range() com *2* PARÂMETROS
 #    Gera uma faixa numérica que parte do valor do
 #    primeiro parâmetro (inclusive) até o valor do
-#    segundo parâmetro (exclusive)
+#    segundo parâmetro (EXCLUSIVE)
 for x in range(10, 18):
     print(x)
 
 print("-" * 80)
+
+# 3) range() com *3* PARÂMETROS
+#    1º ~> valor inicial da faixa (inclusive)
+#    2º ~> valor final da faixa (EXCLUSIVE)
+#    3º ~> passo (intervalo entre um valor e o seguinte)
+for n in range(0, 22, 3): # De 0 a 21, saltando de 3 em 3
+    print(n)
+
+print("-" * 80)
+
+# 3.1) range() com passo negativo (CONTAGEM DECRESCENTE)
+for k in range(10, 0, -1): # De 10 a 1, decrescendo
+    print(k)
+
+"""
+RESUMO           INÍCIO        FIM        PASSO
+-----------------------------------------------
+1 parâmetro          (0)     1º par.        (1)
+2 parâmetros     1º par.     2º par.        (1)
+3 parâmetros     1º par.     2º par.    3º par.
+"""
