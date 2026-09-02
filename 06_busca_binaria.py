@@ -1,3 +1,5 @@
+comps = 0       # Variável de estatística
+
 def busca_binaria(lista, val):
     """
     ALGORITMO DE BUSCA BINÁRIA
@@ -9,6 +11,11 @@ def busca_binaria(lista, val):
     vazia. Nesse caso, conclui-se que o valor de busca não existe
     na lista.
     """
+    # global avisa à função para utilizar uma variável que está fora
+    # dela
+    global comps
+    comps = 0
+
     ini = 0                 # Posição inicial da lista
     fim = len(lista) - 1    # Posição final da lista
 
@@ -21,6 +28,9 @@ def busca_binaria(lista, val):
         # O operador // significa divisão inteira, isto é, se a 
         # divisão resultar em parte fracionária, esta será desprezada
         meio = (ini + fim) // 2
+
+        # Conta o número de comparações
+        comps += 1
 
         # Verifica se o valor que está na posição do meio da lista
         # é igual ao valor de busca. Em caso afirmativo, retornamos
@@ -47,3 +57,55 @@ def busca_binaria(lista, val):
     return -1
 
 ######################################################################
+
+nums = [9, 21, 33, 12, 0, 18, -3, 30, -15, 6, 3, 27]
+
+# Vamos definir algumas buscas para fazer
+buscas = [-15, 4, 12]
+
+# Loop para fazer a busca sequencial em cada um dos valores acima
+for v in buscas:
+    pos = busca_binaria(nums, v)
+    if pos >= 0:
+        print(f"Valor {v} encontrado na posição {pos}.")
+    else:
+        print(f"Valor {v} NÃO FOI ENCONTRADO, pois a busca retornou -1.")
+
+############################################################################
+
+# TESTE COM 1M+ DE NOMES
+
+import sys
+
+# Por padrão, o Python cria um cache otimizado de dados. Para nosso uso,
+# porém, esse cache iria prejudicar nossos testes e comparações. Por isso,
+# colocamos esta instrução para desabilitar a criação do cache
+sys.dont_write_bytecode = True
+
+from time import time
+
+# Aqui, importamos a lista com 1M+ de nomes que está na pasta data
+from data.nomes_completos import nomes
+
+# Alguns nomes para efetuar buscas
+buscas = [
+    "EDSON PEREIRA",
+    "MARIA FERREIRA",
+    "VALDIR SILVA",
+    "ORKUTILSON OLIVEIRA"
+]
+
+# Loop para efetuar as buscas
+for n in buscas:
+    hora_ini = time()   # Marcamos a hora de início da busca
+    pos = busca_binaria(nomes, n)
+    hora_fim = time()   # Marcamos a hora de término da busca
+    if pos >= 0:
+        print(f"Nome {n} encontrado na posição {pos} da lista de nomes.")
+    else:
+        print(f"Nome {n} NÃO ENCONTRADO na lista de nomes (busca retornou -1).")
+
+    print(f"Comparações realizadas: {comps}")
+    print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms.\n")
+
+####################################################################################
