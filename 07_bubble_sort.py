@@ -79,11 +79,13 @@ print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}\n\n")
 
 ################################################################################
 
-# TESTE COM 10K NOMES
+# TESTE COM 100K NOMES
 
-from time import time
+from time import perf_counter
 
 import sys
+
+from lib.util import fmt_tempo
 
 # Desabilita a criação de cache otimizado de dados
 sys.dont_write_bytecode = True  
@@ -94,13 +96,13 @@ from data.nomes_desord import nomes
 # vamos dar ao Bubble Sort só os primeiros 100K
 nomes = nomes[:100000]
 
-hora_ini = time()
+inicio = perf_counter()
 bubble_sort(nomes)
-hora_fim = time()
+duracao = perf_counter() - inicio
 
 print(nomes)
 
 print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}")
-print(f"Tempo gasto: {(hora_fim - hora_ini) * 1000}ms.\n\n")
+print(f"Tempo gasto: {fmt_tempo(duracao)}.\n\n")
 
 
