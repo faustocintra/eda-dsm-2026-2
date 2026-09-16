@@ -79,3 +79,31 @@ print("Antes da ordenação:", nums)
 selection_sort(nums)
 print("Após a ordenação:  ", nums)
 print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}\n\n")
+
+################################################################################
+
+# TESTE COM 100K NOMES
+
+from time import perf_counter
+
+import sys
+
+from lib.util import fmt_tempo
+
+# Desabilita a criação de cache otimizado de dados
+sys.dont_write_bytecode = True  
+
+from data.nomes_desord import nomes
+
+# Apesar de a lista nomes_desord ter 1M+ de itens,
+# vamos dar ao Selection Sort só os primeiros 100K
+nomes = nomes[:100000]
+
+inicio = perf_counter()
+selection_sort(nomes)
+duracao = perf_counter() - inicio
+
+print(nomes)
+
+print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}")
+print(f"Tempo gasto: {fmt_tempo(duracao)}.\n\n")
