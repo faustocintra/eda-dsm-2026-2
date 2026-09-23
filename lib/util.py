@@ -19,3 +19,23 @@ def fmt_tempo(segundos) -> str:
 
     minutos, segundos = divmod(segundos, 60)
     return f"{int(minutos)} min {segundos:.2f} s"
+
+def fmt_memoria(inicial : float, final: float, pico : float):
+    """Formata os valores de medição de memória de tracemalloc()
+           adequando-os para a leitura e interpetação por seres humanos
+    
+        Args:
+            inicial (float): memória ocupada ao início da medição
+            final (float): memória ocupada ao final da medição
+            pico (float): máximo de memória ocupada durante a medição
+    
+        Returns:
+            (string, string): tupla com valores formatados, representando
+                o pico de memória adicional causado pela execução mensurada
+                e a memória adicional ocupada ao final da execução mensurada
+        """
+    mib : int = 1024 ** 2
+    pico_fmtd : str = f"{(pico - inicial) / mib:.2f} MiB"
+    adic_fmtd : str = f"{(final - inicial) / mib:.2f} MiB"
+
+    return pico_fmtd, adic_fmtd

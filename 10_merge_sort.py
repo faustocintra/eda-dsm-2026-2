@@ -68,7 +68,8 @@ def merge_sort(lista):
     # lista ordenada
 
     # A sobra está na sublista esquerda
-    if pos_esq < pos_dir: sobra = sublista_esq[pos_esq:]
+    # if pos_esq < pos_dir: sobra = sublista_esq[pos_esq:] # BUG!
+    if pos_esq < len(sublista_esq): sobra = sublista_esq[pos_esq:]
     # A sobra está na sublista direita
     else: sobra = sublista_dir[pos_dir:]
 
@@ -92,8 +93,69 @@ def merge_sort(lista):
 
 nums = [7, 0, 9, 2, 8, 4, 6, 1, 5, 3]
 print("--- CASO MÉDIO ---")
+# Divisões: 9, comparações: 21, junções: 9
 divs = comps = juncs = 0        # Zerando variáveis de estatística
 print("Antes da ordenação:", nums)
 nums_ord = merge_sort(nums)
 print("Após a ordenação:  ", nums_ord)
 print(f"Divisões: {divs}, comparações: {comps}, junções: {juncs}\n\n")
+
+# Um dos piores casos para o Merge Sort ocorre quando a lista inicial
+# contém valores que ficam intercalados durante a mesclagem. Assim, 
+# nenhuma sublista termina antecipadamente.
+nums = [2, 6, 4, 0, 8, 3, 7, 5, 1, 9]
+print("--- PIOR CASO ---")
+# Divisões: 9, comparações: 25, junções: 9
+divs = comps = juncs = 0        # Zerando variáveis de estatística
+print("Antes da ordenação:", nums)
+nums_ord = merge_sort(nums)
+print("Após a ordenação:  ", nums_ord)
+print(f"Divisões: {divs}, comparações: {comps}, junções: {juncs}\n\n")
+
+nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print("--- MELHOR CASO ---")
+# Divisões: 9, comparações: 15, junções: 9
+divs = comps = juncs = 0        # Zerando variáveis de estatística
+print("Antes da ordenação:", nums)
+nums_ord = merge_sort(nums)
+print("Após a ordenação:  ", nums_ord)
+print(f"Divisões: {divs}, comparações: {comps}, junções: {juncs}\n\n")
+
+################################################################################
+
+# TESTE COM 1M+ NOMES
+
+from time import perf_counter
+import tracemalloc
+
+import sys
+
+from lib.util import fmt_tempo, fmt_memoria
+
+# Desabilita a criação de cache otimizado de dados
+sys.dont_write_bytecode = True  
+
+from data.nomes_desord import nomes
+
+# Inicia a medição de memória
+tracemalloc.start()
+mem_inicial, _ = tracemalloc.get_traced_memory()
+tracemalloc.reset_peak()
+
+inicio = perf_counter()
+nomes_ord = merge_sort(nomes)
+duracao = perf_counter() - inicio
+
+# Finaliza a medição de memória
+mem_final, mem_pico = tracemalloc.get_traced_memory()
+tracemalloc.stop()
+
+print(nomes_ord)
+
+print(f"Divisões: {divs}, comparações: {comps}, junções: {juncs}")
+print(f"Tempo gasto: {fmt_tempo(duracao)}.")
+
+pico_fmtd, adic_fmtd = fmt_memoria(mem_inicial, mem_final, mem_pico)
+
+print(f"Pico adicional: {pico_fmtd}")
+print(f"Memória adicional ao final: {adic_fmtd}")
