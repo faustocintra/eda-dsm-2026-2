@@ -106,3 +106,43 @@ quick_sort(nums)
 print("Após a ordenação:  ", nums)
 print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}\n\n")
 
+################################################################################
+
+# TESTE COM 1M+ NOMES
+
+from time import perf_counter
+import tracemalloc
+
+import sys
+
+from lib.util import fmt_tempo, fmt_memoria
+
+# Desabilita a criação de cache otimizado de dados
+sys.dont_write_bytecode = True  
+
+from data.nomes_desord import nomes
+
+# Inicia a medição de memória
+tracemalloc.start()
+mem_inicial, _ = tracemalloc.get_traced_memory()
+tracemalloc.reset_peak()
+
+inicio = perf_counter()
+comps = trocas = passd = 0
+quick_sort(nomes)
+duracao = perf_counter() - inicio
+
+# Finaliza a medição de memória
+mem_final, mem_pico = tracemalloc.get_traced_memory()
+tracemalloc.stop()
+
+print(nomes)
+
+print(f"Passadas: {passd}, comparações: {comps}, trocas: {trocas}")
+print(f"Tempo gasto: {fmt_tempo(duracao)}.")
+
+pico_fmtd, adic_fmtd = fmt_memoria(mem_inicial, mem_final, mem_pico)
+
+print(f"Pico adicional: {pico_fmtd}")
+print(f"Memória adicional ao final: {adic_fmtd}")
+
