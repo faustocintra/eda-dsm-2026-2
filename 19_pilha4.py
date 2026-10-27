@@ -6,10 +6,10 @@ from lib.stack import Stack
 pilha = Stack()
 
 # Expressão balanceada
-# expr = "5 - (2 * (3 + 4) - (5 / 3) + 1) * 2"
+#expr = "5 - (2 * (3 + 4) - (5 / 3) + 1) * 2"
 
 # Expressão desbalanceada (fecha mais que abre)
-expr = "5 - (2 * (3 + 4) - (5 / 3)) + 1)) * 2"
+#expr = "5 - (2 * (3 + 4) - (5 / 3)) + 1)) * 2"
 
 # Expressão desbalanceada (abre mais que fecha)
 expr = "5 - (2 * ((3 + 4) - (5 / 3) + 1) * (2"
