@@ -1,66 +1,47 @@
-from enum import Enum
+from lib.deque import Deque, Position
 
-class Position(Enum):
-    """ 
-    Classe de enumeração que define a posição onde serão
-    feitas as operações de inserção, remoção e consulta
-    no deque
-    """
-    START = "start"
-    END = "end"
+# Instancia um novo deque
+deque = Deque()
 
-class Deque:
-    """
-    ESTRUTURA DE DADOS DEQUE
-    Deque (Doubly-Ended QUEue) é uma estrutura de dados
-    derivada da fila, permitindo inserções e remoções em
-    qualquer uma de suas extremidades. Com isso, o deque
-    pode se comportar tanto como uma fila comum quanto como
-    uma fila que admite inserções prioritárias (na primeira
-    posição) quanto a possibilidade de remoção do último
-    item (desistência).
-    """
+# PARTE 1: deque se comportando como uma fila comum
 
-    def __init__(self):
-        """ Método construtor """
-        self.__data = []        # Lista vazia
+deque.insert("Antero",      Position.END)
+deque.insert("Ermelinda",   Position.END)
+deque.insert("Procópio",    Position.END)
+deque.insert("Hermógenes",  Position.END)
+deque.insert("Ivanilda",    Position.END)
+deque.insert("Olentina",    Position.END)
+print(deque)
 
-    def insert(self, val, position):
-        """ Método para inserção """
-        if position == Position.START:
-            self.__data.insert(0, val)
-        elif position == Position.END:
-            self.__data.append(val)
-        else:
-            raise Exception(f"ERRO: posição '{position}' inválida para inserção.")
-        
-    def is_empty(self):
-        """ Retorna True se o deque estiver vazio, ou False, caso contrário """
-        return len(self.__data) == 0
-    
-    def remove(self, position):
-        """ Método para remoção """
-        if self.is_empty():
-            raise Exception("ERRO: impossível remover de um deque vazio.")
-        if position == Position.START:
-            return self.__data.pop(0)
-        if position == Position.END:
-            return self.__data.pop()
-        raise Exception(f"ERRO: posição '{position}' inválida para remoção.")
-    
-    def peek(self, position):
-        if self.is_empty():
-            raise Exception("ERRO: impossível consultar um deque vazio.")
-        if position == Position.START:
-            return self.__data[0]
-        if position == Position.END:
-            return self.__data[-1]
-        raise Exception(f"ERRO: posição '{position}' inválida para consulta.")
-    
-    def __str__(self):
-        """ Retorna uma representação do deque como string """
-        return str(self.__data)
+removido = deque.remove(Position.START)
+print(f"{removido} foi removido do início do deque.")
+print(deque)
 
-##################################################################################        
-        
-    
+pessoa = "Tibúrcio"
+deque.insert(pessoa,        Position.END)
+print(f"{pessoa} foi inserido no final do deque.")
+print(deque)
+
+primeiro = deque.peek(Position.START)
+print(f"{primeiro} é quem está no início do deque.")
+print(deque)
+
+print("-" * 80)
+
+# PARTE 2: funcionalidades exclusivas do deque
+
+# Inserção prioritária (na primeira posição)
+pessoa = "Bartira"
+deque.insert(pessoa,        Position.START)
+print(f"{pessoa} foi inserida no início do deque.")
+print(deque)
+
+# Desistência (remoção do último item)
+desistente = deque.remove(Position.END)
+print(f"{desistente} foi removido do final do deque.")
+print(deque)
+
+# Consultando o último elemento do deque
+ultimo = deque.peek(Position.END)
+print(f"{ultimo}, no momento, é quem está no final do deque.")
+print(deque)
