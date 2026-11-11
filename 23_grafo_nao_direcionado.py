@@ -40,3 +40,5 @@ mapa.add_edge("Venezuela", "Guiana")
 mapa.add_edge("Guiana", "Suriname")
 mapa.add_edge("Suriname", "França")
 print(mapa)
+
+mapa.visualize()

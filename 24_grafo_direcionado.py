@@ -22,4 +22,6 @@ familia.add_edge("Joaquim", "Argemiro", "filho de")
 
 print(familia)
 
-familia.remove_vertex("Joaquim")
+familia.visualize()
+
+#familia.remove_vertex("Joaquim")
